@@ -51,7 +51,6 @@ class ConferenceDetailEncoder(ModelEncoder):
         "created",
         "updated",
         "location",
-        "weather",
     ]
     encoders = {
         "location": LocationListEncoder(),
@@ -62,7 +61,7 @@ def api_show_conference(request, id):
     if request.method == "GET":
         conference = Conference.objects.get(id=id)
         conditions = get_weather_data(conference.location.city, conference.location.state)
-        return JsonResponse(
+        return JsonResponse(        #api weather
             {"conference": conference,
             "weather": conditions},
             safe=False,

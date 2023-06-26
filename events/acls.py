@@ -27,14 +27,14 @@ def get_weather_data(city, state):
     url = "http://api.openweathermap.org/geo/1.0/direct"
 
     params = {
-        "q": f"{city},{state}",
+        "q": f"{city},{state},US",
+        "limit": 1,
         "appid": OPEN_WEATHER_API_KEY
     }
     
     response = requests.get(url, params=params)
     content = json.loads(response.content)
-    print(content)
-    print("\n")
+    
     latitude = content[0]['lat']
     longitude = content[0]['lon']
 
@@ -47,14 +47,13 @@ def get_weather_data(city, state):
         "appid": OPEN_WEATHER_API_KEY
     }
 
-    response = requests.get(weather_url, weather_params=weather_params)
-   
-    weather_content = json.loads(response.weather_content)
-    # print(weather_content)
-    # print("\n")
+    response = requests.get(weather_url, params=weather_params)
+  
+    weather_content = json.loads(response.content)
+ 
     try:
         return {
-            "weather": weather_content["main"][0]["temp"], 
+            "weather": weather_content["main"]["temp"], 
             "description": weather_content["weather"][0]["description"]
             }
             

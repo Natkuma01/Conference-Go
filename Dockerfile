@@ -1,7 +1,6 @@
 # Select the base image that is best for our application
 FROM python:3
 
-# Install any operating system junk
 
 
 # Set the working directory to copy stuff to
