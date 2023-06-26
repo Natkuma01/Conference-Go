@@ -1,0 +1,17 @@
+#  what base image we try to use
+FROM python:3
+
+# set  an environment variable so that python prints things immedicately
+ENV PYTHONUNBUFFERED 1
+
+# set working directory to /app
+WORKDIR /app
+
+# copy over requirements.txt so that we can install from it
+COPY requirements.txt requirements.txt
+
+# install the dependencies using pip
+RUN pip install -r requirements.txt
+
+# run the Django development server
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
