@@ -3,19 +3,20 @@ from django.urls import reverse
 from django.core.exceptions import ObjectDoesNotExist
 
 
-class Attendee(models.Model):
-    """
-    The Attendee model represents someone that wants to attend
-    a conference
-    """
+# always leave 2 lines above
+class ConferenceVO(models.Model):
+    import_href = models.CharField(max_length=200, unique=True)
+    name = models.CharField(max_length=200)
 
+class Attendee(models.Model):
     email = models.EmailField()
     name = models.CharField(max_length=200)
     company_name = models.CharField(max_length=200, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
 
     conference = models.ForeignKey(
-        "events.Conference",
+        # "events.Conference",  it changed because attendees is a microservice now
+        ConferenceVO,
         related_name="attendees",
         on_delete=models.CASCADE,
     )
