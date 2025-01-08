@@ -6,7 +6,7 @@ from .models import ConferenceVO
 
 def get_conferences():
     url = "http://monolith:8000/api/conferences/"
-    response = requests.get(url)
+    response = requests.get(url, timeout=60)
     content = json.loads(response.content)
     for conference in content["conferences"]:
         ConferenceVO.objects.update_or_create(
