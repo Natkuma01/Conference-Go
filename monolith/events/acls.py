@@ -12,7 +12,7 @@ def get_photo(city, state):
     
     url = "https://api.pexels.com/v1/search"
     
-    response = requests.get(url, params=params, headers=headers)
+    response = requests.get(url, params=params, headers=headers, timeout=60)
 
     content = json.loads(response.content)
     
@@ -32,7 +32,7 @@ def get_weather_data(city, state):
         "appid": OPEN_WEATHER_API_KEY
     }
     
-    response = requests.get(url, params=params)
+    response = requests.get(url, params=params, timeout=60)
     content = json.loads(response.content)
     
     latitude = content[0]['lat']
@@ -47,7 +47,7 @@ def get_weather_data(city, state):
         "appid": OPEN_WEATHER_API_KEY
     }
 
-    response = requests.get(weather_url, params=weather_params)
+    response = requests.get(weather_url, params=weather_params, timeout=60)
   
     weather_content = json.loads(response.content)
  
